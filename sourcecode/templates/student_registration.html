@@ -1,0 +1,69 @@
+{% include 'main_head.html' %}
+
+
+<div class="mt-120">
+     <div class="card2 w-50 p-20 m-auto">
+        <form action="student_registration_action" method="post">
+            <input type="hidden" name="email" value="{{email}}">
+            <input type="hidden" name="otp" value="{{otp}}">
+            <div class="card-title">Student Registration</div>
+            <div class="flex space-around">
+                <div class="w-25">
+                    <div class="mt-10">
+                        <label for="otp2">OTP</label>
+                        <input type="number" id="otp2" name="otp2" placeholder="Enter OTP" class="form-input" required>
+                    </div>
+                    <div class="mt-10">
+                        <label for="first_name">First Name</label>
+                        <input type="text" id="first_name" name="first_name" placeholder="Enter First Name" class="form-input" required>
+                    </div>
+                    <div class="mt-10">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" id="last_name" name="last_name" placeholder="Enter Last Name" class="form-input" required>
+                    </div>
+                    <div class="mt-10">
+                        <label for="ssn">SSN</label>
+                        <input type="number" id="ssn" name="ssn" placeholder="Enter Your SSN " class="form-input" required>
+                    </div>
+                    <div class="mt-10">
+                        <label for="level">Level</label>
+                        <input type="text" id="level" name="level" placeholder="Enter Level" class="form-input" required>
+                    </div>
+                     <div class="mt-10">
+                        <label for="address">Address</label>
+                        <textarea  id="address" name="address"  rows="2" class="form-input" required placeholder="Enter your Address here..."></textarea>
+                    </div>
+                </div>
+                <div class="w-25 ">
+                    <div class="mt-10">
+                        <label for="email">Email</label>
+                         <input id="email" name="email" disabled class="form-input" value="{{email}}">
+                    </div>
+                    <div class="mt-10">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter Phone Number" class="form-input" required>
+                    </div>
+                    <div class="mt-10">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter Password" class="form-input" required>
+                    </div>
+                    <div class="mt-10">
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state" placeholder="Enter State" class="form-input" required>
+                    </div>
+                    <div class="mt-10">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" placeholder="Enter City" class="form-input" required>
+                    </div>
+                    <div class="mt-10">
+                        <label for="zipcode">ZIP Code</label>
+                        <input type="number" id="zipcode" name="zipcode" placeholder="Enter Zip Code" class="form-input" required>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-30">
+                <input type="submit" class="btn-grad w-100 mt-20  " value="Submit">
+            </div>
+        </form>
+    </div>
+</div>

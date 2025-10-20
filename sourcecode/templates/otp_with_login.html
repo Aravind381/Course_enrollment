@@ -1,0 +1,17 @@
+{% include "main_head.html" %}
+
+<div class="mt-120">
+    <div class="card2 w-30 p-20 m-auto">
+        <form action="otp_with_login_action" method="post">
+            <input type="hidden" name="email" value="{{email}}">
+            <input type="hidden" name="otp" value="{{otp}}">
+            <div class="mt-10">
+                <label for="otp2">OTP</label>
+                <input type="number" id="otp2" name="otp2" placeholder="Enter OTP" class="form-input" required>
+            </div>
+            <div class="mt-30">
+                <input type="submit" value="Login" class="btn-grad m-auto">
+            </div>
+        </form>
+    </div>
+</div>

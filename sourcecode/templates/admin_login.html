@@ -1,0 +1,23 @@
+{% include "main_head.html" %}
+
+<div class="w-30  m-auto">
+    <div class="box-shadow p-20 mt-150 card2">
+          <div>
+            <img src="https://media.istockphoto.com/id/1398145548/vector/3d-character-businessman-working-on-laptop-computer.jpg?s=612x612&w=0&k=20&c=PaopKp8vXJIN3wQfrFSgL97Tx_ZUAnkFnQwJARBwC9c=" class="student_login_img ">
+        </div>
+        <form action="admin_login_action" method="post">
+            <div class="card-title txt-center">Admin Login</div>
+            <div>
+                <label for="username" class="">Username:</label>
+                <input type="text" name="username" id="username" class="form-input" placeholder="Please enter your username" required>
+            </div>
+             <div class="mt-10">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" class="form-input" placeholder="Please enter your password" required>
+            </div>
+            <div>
+                <input type="submit" class="btn-grad  w-100 mt-20 " value="Login">
+            </div>
+        </form>
+    </div>
+</div>

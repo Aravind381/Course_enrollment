@@ -1,0 +1,99 @@
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+.nav{
+    top:10px;
+    left:15;
+    width: 98%;
+    height: 80px;
+    padding: 10px 100px;
+    justify-content: space-between;
+    display: flex;
+    position: fixed;
+    box-shadow:0 0 10px plum;
+}
+.nav-menu{
+    margin-left:30px;
+    margin-left:30px;
+    display: flex;
+    gap: 20px;
+}
+.nav-menu-item{
+    text-decoration: none;
+    font-weight:bold;
+    padding: 15px;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px;
+    font-size:18px;
+    border-radius:10px;
+
+}
+.nav-menu-item:hover{
+    background-image: linear-gradient(to right, black 0%, black  51%, black  100%)
+}
+.logo-img{
+    width: 70px;
+}
+.admin-bg-color{
+    background-color:#e6e6e6;
+}
+.box-shadow{
+    box-shadow:0 0 10px #E0EAFC;
+}
+
+
+/*  -------------------FORMS---------------*/
+.form-input {
+    width: 100%;
+    border: 1px solid lightgray;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.form-input:focus {
+    outline: none;
+    border: 2px solid plum ;
+
+}
+.form-btn {
+    width: 100%;
+    border: 1px solid lightgray;
+    font-size: 18px;
+    padding: 10px
+}
+.form-btn:hover {
+    background-color:#03bdec ;
+    color: #ffffff;
+}
+.form-btn,a{
+    text-decoration:none;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+
+.btn-grad {background-image: linear-gradient(to right, #FF8008 0%, #FFC837  51%, #FF8008  100%)}
+.btn-grad {
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 5px #eee;
+    border-radius: 10px;
+    display: block;
+}
+
+.btn-grad:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+}
+
+

@@ -1,0 +1,53 @@
+{% if session['role']=="student" %}
+       {% include "student_head.html" %}
+{% endif %}
+{% if session['role']=="professor" %}
+       {% include "professor_head.html" %}
+{% endif %}
+<div class="mt-120"></div>
+<div class="w-90  m-auto">
+    {% for assignment in assignments %}
+    {% set  section =get_section_id_by_assignment(assignment[7]) %}
+    <div class="box-shadow p-20 mt-20">
+            <div class="flex">
+                <div class="w-30">
+                    <div>CRN :{{section[2]}}</div>
+                </div>
+                <div class="w-30">
+                    <div>Assignment Pdf:<a href="../static/files/assignments/{{assignment[2]}}">{{assignment[2]}}</a></div>
+                </div>
+                <div class="w-30">
+                    <div class="flex">
+                        <div class="card-label">Date of Assignment Submission:</div>
+                         <div class="ml-10">{{assignment[4]}}</div>
+                    </div>
+                </div>
+                <div class="w-10">
+                    <div><a href="/view_submission">View Submission</a></div>
+                </div>
+            </div>
+            <div class="mt-20">Description:{{assignment[5]}}</div>
+
+
+        <hr class="mt-10">
+        <form action="student_assignments_submission_action" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="assignment_id" value="{{assignment[0]}}">
+            <input type="hidden" name="enrollment_id" value="{{enrollment_id}}">
+
+            <div class="flex space-between">
+                <div class="w-60">
+                    <div class="mt-10">
+                        <label for="assignment_pdf">Upload Assignment Pdf :</label>
+                        <input type="file" name="assignment_pdf" id="assignment_pdf" class="form-input">
+                    </div>
+                </div>
+                <div class="w-30">
+                    <div class="mt-20">
+                        <input type="submit" class="btn-grad w-100 m-auto" value="Upload Assignment">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+        {% endfor %}
+</div>

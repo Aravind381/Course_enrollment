@@ -1,0 +1,35 @@
+{% if session['role']=="professor" %}
+       {% include "professor_head.html" %}
+{% endif %}
+{% if session['role']=="student" %}
+       {% include "student_head.html" %}
+{% endif %}
+
+
+<div class="mt-100">
+    <div class="card-title">View Assignments</div>
+</div>
+<div class="row mt-50">
+    {% for assignment in assignments %}
+    <div class="card2 mt-10 p-20 ml-30 box-shadow">
+        <div class="">
+            <div class="flex">
+                <div class="card-label">Assignment Title:</div>
+                 <div class="ml-10">{{assignment[1]}}</div>
+            </div>
+            <div class="flex">
+                <div class="card-label"> Assignment Pdf :</div>
+                <div><a href="../static/files/assignments/{{assignment[2]}}">{{assignment[2]}}</a></div>
+            </div>
+            <div class="flex">
+                <div class="card-label">Description:</div>
+                 <div class="ml-10">{{assignment[3]}}</div>
+            </div>
+            <div class="flex">
+                <div class="card-label">Submitted Date:</div>
+                 <div class="ml-10">{{assignment[5]}}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

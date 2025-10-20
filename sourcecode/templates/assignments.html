@@ -1,0 +1,89 @@
+{% if session['role']=="professor" %}
+       {% include "professor_head.html" %}
+{% endif %}
+{% if session['role']=="student" %}
+       {% include "student_head.html" %}
+{% endif %}
+
+
+{% if session['role']=="professor" %}
+<div class="w-30  m-auto">
+    <div class="box-shadow p-20 mt-120">
+        <form action="professor_assignment_action" method="post" enctype="multipart/form-data">
+            <div class="card-title">Add Assignments Here</div>
+             <div class="mt-20">
+                <label for="assignment_title">Assignment Title :</label>
+                <input type="text" name="assignment_title" id="assignment_title" placeholder="Enter Assignment Title Here" class="form-input">
+            </div>
+            <div class="mt-10">
+                <label>Sections</label>
+                <select class="form-input" name="section_id" required>
+                    <option>Choose Section</option>
+                    {% for section in sections %}
+                    <option value="{{section[0]}}">
+                        {{section[0]}}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+             <div class="mt-10">
+                <label for="submission_date">Submission Date:</label>
+                <input type="datetime-local" name="submission_date" id="submission_date" class="form-input">
+            </div>
+            <div class="mt-10">
+                <label for="assignment_pdf">Upload Assignment Pdf :</label>
+                <input type="file" name="assignment_pdf" id="assignment_pdf" class="form-input">
+            </div>
+
+            <div class="mt-10">
+                <label for="description">Description :</label>
+                <textarea name="description" id="description" class="form-input" placeholder="Enter Description Here"></textarea>
+            </div>
+            <div class="mt-20">
+                <input type="submit" class="btn-grad w-100 m-auto" value="Add Assignment">
+            </div>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+
+
+{% if session['role']=="professor" %}
+<hr class="mt-20">
+<div class="mt-20">
+    <div class="card-title">View Assignments</div>
+</div>
+<div class="row mt-50">
+    {% for assignment in assignments %}
+    {% set  section =get_section_id_by_assignment(assignment[7]) %}
+    <div class="card2 mt-10 p-20 ml-30 box-shadow">
+        <div class="">
+            <div class="flex">
+                <div class="card-label">CRN:</div>
+                 <div class="ml-10">{{section[2]}}</div>
+            </div>
+            <div class="flex">
+                <div class="card-label">Assignment Title:</div>
+                 <div class="ml-10">{{assignment[1]}}</div>
+            </div>
+            <div class="flex">
+                <div class="card-label"> Assignment Pdf :</div>
+                <div><a href="../static/files/assignments/{{assignment[2]}}">{{assignment[2]}}</a></div>
+            </div>
+            <div class="flex">
+                <div class="card-label">Description:</div>
+                 <div class="ml-10">{{assignment[5]}}</div>
+            </div>
+            <div class="flex">
+                <div class="card-label">Date of Assignment Submission:</div>
+                 <div class="ml-10">{{assignment[4]}}</div>
+            </div>
+            <div>
+               <div class="btn-grad"><a href="/view_submission">View Submissions</a></div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

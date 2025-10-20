@@ -1,0 +1,114 @@
+{% if session['role']=="admin" %}
+       {% include "admin_head.html" %}
+{% endif %}
+{% if session['role']=="professor" %}
+       {% include "professor_head.html" %}
+{% endif %}
+{% if session['role']=="student" %}
+       {% include "student_head.html" %}
+{% endif %}
+
+
+<div class="mt-100">
+    <div class="flex ">
+        {% if session['role']== "admin" or session['role']== "professor"   %}
+        <div class="w-20"> <a href="add_section" class="btn-grad ">Add Section</a></div>
+        <div class="w-50"> <h2 class="card-title mt-20">View Section</h2></div>
+        {% endif %}
+        {% if session['role']== "student" %}
+        <div class="m-auto card-title">View Section</div>
+        {% endif %}
+
+    </div>
+</div>
+
+<div class="row">
+    {% for section in sections %}
+    {% set professor = get_professor_by_professor_id(section[10]) %}
+    {% set department = get_department_by_department_id(section[11]) %}
+    {% set course = get_course_by_course_id(section[9]) %}
+
+    {% if session['role']=='student'%}
+    {% set enrollment = get_enrollment_by_enrollment_id(section[0]) %}
+    {% endif%}
+
+    {% set is_enrol_expired = get_is_enrollment_expired(section[0],section[5])%}
+
+    <div class="card2 mt-30 p-20  box-shadow ml-30">
+      <div class=" ">
+        <div class="flex">
+            <div class="card-label">Section Id:</div>
+             <div class="ml-10">{{section[0]}}</div>
+        </div>
+           <div class="flex">
+            <div class="card-label">Section Title:</div>
+             <div class="ml-10">{{section[1]}}</div>
+        </div>
+        <div class="flex">
+            <div class="card-label">CRN:</div>
+             <div class="ml-10">{{section[2]}}</div>
+        </div>
+          <div class="flex">
+            <div class="card-label">Department Name:</div>
+             <div class="ml-10">{{department[1]}}</div>
+        </div>
+        <div class="flex">
+            <div class="card-label">Professor Name:</div>
+             <div class="ml-10">{{professor[1]}} {{professor[2]}}</div>
+        </div>
+        <div class="flex">
+            <div class="card-label">Course Name:</div>
+             <div class="ml-10">{{course[2]}}</div>
+        </div>
+        <div class="flex">
+            <div class="card-label">Enrollment Start Date:</div>
+             <div class="ml-10">{{section[5].strftime("%d-%m-%Y")}}</div>
+        </div>
+        <div class="flex">
+            <div class="card-label">Enrollment End Date:</div>
+             <div class="ml-10">{{section[6].strftime("%d-%m-%Y")}}</div>
+        </div>
+        <div class="flex">
+            <div class="card-label">Day:</div>
+             <div class="ml-10">{{section[8]}}</div>
+        </div>
+        <div class="flex">
+            <div class="card-label">Class Start Time:</div>
+             <div class="ml-10">{{section[3]}}</div>
+        </div>
+        <div class="flex">
+            <div class="card-label">Class End Time:</div>
+             <div class="ml-10">{{section[4]}}</div>
+        </div>
+        <div class="flex">
+            <div class="card-label">Number Of Students:</div>
+             <div class="ml-10">{{section[7]}}</div>
+        </div>
+
+          {% if session['role']== "student" %}
+            {% if enrollment > 0 %}
+            <div class="mt-30">
+                <div class=""><a href="drop_enrollment?section_id={{section[0]}}" class="btn-grad btn-danger txt-none text-center">Drop</a></div>
+            </div>
+            {% else %}
+           {% if is_enrol_expired :%}
+            <div class="mt-30" >
+                <div class=""><a href="enroll?section_id={{section[0]}}&day={{section[8]}}&start_time={{section[3]}}&end_time={{section[4]}}" class="btn-grad txt-none text-center" >Enroll</a></div>
+            </div>
+           {% else: %}
+               <div class="mt-30 danger txt-center">Section Expired..!</div>
+            {% endif %}
+            {% endif %}
+          {% endif %}
+         {% if session['role']== "professor" %}
+          <div class="mt-30">
+            <div class=""><a href="course_material?section_id={{section[0]}}" class="btn-grad txt-none">Add Course Material</a></div>
+          </div>
+          <div class="mt-5">
+            <div><a href="view_course_material?section_id={{section[0]}}" class="btn-grad txt-none">View Course Material</a></div>
+          </div>
+          {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,68 @@
+{% include 'admin_head.html'  %}
+
+<div class="mt-100 flex ">
+    <div class="w-20"> <a href="add_professor" class="btn-grad ">ADD Professor</a></div>
+    <div class="w-50"> <h2 class="txt-center mt-20">View Professors</h2></div>
+    <div class="w-30">
+        <form action="/professor">
+            <div class="flex">
+                <div class="mt-20">
+                    <input type="search" placeholder="Search.." name="keyword"  id= "keyword" class="form-input">
+                </div>
+                <div>
+                    <input type="submit" class="btn w-100 mt-20" value="Submit">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="mt-20">
+    <div class="row ">
+        {% for professor in professors %}
+        <div class="card2 p-10 w-30 ml-30 mt-20">
+            <div class="flex">
+                <div class="w-50">
+                    <div class="w-100">
+                        <img src="../static/files/professor_files/{{professor[8]}}" class="w-100" style="max-width:100%; height:250px; border-radius:14px;">
+                    </div>
+                </div>
+                <div class="w-50 gap-5 ">
+                    <div class="row">
+                        <div class="txt-w ml-10">Professor SSN: </div>
+                        <div class="ml-10 txt-b">{{professor[7]}}</div>
+                     </div>
+                    <div class="row mt-10">
+                        <div class="txt-w ml-10">First Name:</div>
+                        <div class="ml-10 txt-b">{{professor[1]}}</div>
+                     </div>
+                     <div class="row mt-10">
+                        <div class="txt-w ml-10">Last Name:</div>
+                        <div class="ml-10 txt-b">{{professor[2]}}</div>
+                     </div>
+                    <div class="row mt-10">
+                        <div class="txt-w ml-10">Email:</div>
+                        <div class="ml-10 txt-b">{{professor[3]}}</div>
+                    </div>
+                    <div class="row mt-10 ml-10">
+                        <div class="txt-w">Phone:</div>
+                        <div class="ml-10 txt-b">{{professor[4]}}</div>
+                     </div>
+                    <div class="row mt-10 ml-10">
+                        <div class="txt-w">Designation:</div>
+                        <div class="ml-10 txt-b">{{professor[6]}}</div>
+                     </div>
+                    <div class="ml-15 m-10">
+                        <a href="edit_professor_profile?professor_id={{professor[0]}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-pencil" viewBox="0 0 16 16">
+                          <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                        </svg><span class="ml-10">Edit Profile</span>
+                        </a>
+                    </div>
+                </div>
+           </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>

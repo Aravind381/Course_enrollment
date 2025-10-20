@@ -1,0 +1,20 @@
+{% include 'admin_head.html'  %}
+
+    <div class="mt-150">
+        <div class="w-30 m-auto">
+            <div class="card2  p-10">
+                <form action="edit_department_action" method="post">
+                    <input type="hidden" name="department_id" value="{{department[0]}}">
+                    <div class="card-title">Update Department</div>
+                    <div class="mt-30">
+                        <label>Department Name</label>
+                        <input type="text" name="department_name" id="department_name" value="{{department[1]}}" class="form-input" >
+                    </div>
+                    <div class="mt-10">
+                        <input type="submit" value="Update" class="btn-grad w-100 m-auto">
+                    </div>
+                </form>
+                 <div class="txt-msg">{{message}}</div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,101 @@
+{% if session['role']=="admin" %}
+       {% include "admin_head.html" %}
+{% endif %}
+{% if session['role']=="professor" %}
+       {% include "professor_head.html" %}
+{% endif %}
+
+<div class="row mt-100 space-around">
+    <div class="w-50">
+        <div class="card2 p-20 border-radius box-shadow">
+            <form action="add_section_action" , method="post">
+                    <div class="card-title">Add Section</div>
+
+                <div class="flex space-around">
+                    <div class="w-25">
+                         <div class="mt-20">
+                            <label for="crn">CRN:</label>
+                            <input type="text" id="crn" name="crn" class="form-input" placeholder="Enter CRN" required>
+                        </div>
+                         <div class="mt-20">
+                            <label for="section_title">Section Title:</label>
+                            <input type="text" id="section_title" name="section_title" class="form-input" placeholder="Enter Section Title" required>
+                        </div>
+                        <div class="mt-20">
+                            <label>Choose Course:</label>
+                            <select class="form-input" name="course_id" required>
+                                <option value="">Choose Course</option>
+                                {% for course in courses %}
+                                <option value="{{course[0]}}">
+                                    {{course[2]}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {% if session['role']=="admin" %}
+                        <div class="mt-20">
+                            <label>Choose Professor</label>
+                            <select class="form-input" name="professor_id" required>
+                                <option>Choose Professor</option>
+                                {% for professor in professors %}
+                                <option value="{{professor[0]}}">
+                                    {{professor[1]}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {% endif %}
+                         <div class="mt-20">
+                            <label>Department</label>
+                            <select class="form-input" name="department_id" required>
+                                <option>Choose Department</option>
+                                {% for department in departments %}
+                                <option value="{{department[0]}}">
+                                    {{department[1]}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mt-20">
+                                <label for="day">Choose Day:</label>
+                                <select name="day" id="day" class="form-input" required>
+                                  <option value="monday">Monday</option>
+                                  <option value="tuesday">Tuesday</option>
+                                  <option value="wednesday">Wednesday</option>
+                                  <option value="thursday">Thursday</option>
+                                  <option value="friday">Friday</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="w-25">
+                        <div class="mt-20">
+                            <label for="enrollment_start_date">Enrollment Start Date:</label>
+                            <input type="date" id="enrollment_start_date" name="enrollment_start_date" class="form-input" required>
+                        </div>
+                        <div class="mt-20">
+                            <label for="enrollment_end_date">Enrollment End Date:</label>
+                            <input type="date" id="enrollment_end_date" name="enrollment_end_date" class="form-input" required>
+                        </div>
+                        <div class="mt-20">
+                            <label for="start_time">Section Start Time:</label>
+                            <input type="time" id="start_time" name="start_time" class="form-input" required>
+                        </div>
+                        <div class="mt-20">
+                            <label for="end_time">Section End Time:</label>
+                            <input type="time" id="end_time" name="end_time" class="form-input"  required>
+                        </div>
+                        <div class="mt-20">
+                            <label for="number_of_students">Number Of Students:</label>
+                            <input type="number" id="number_of_students" name="number_of_students" class="form-input" placeholder="No of Students"  required>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-10">
+                    <input type="submit" class="btn-grad  w-100 mt-20 " value="Add Section">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

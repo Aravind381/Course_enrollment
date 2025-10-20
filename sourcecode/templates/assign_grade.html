@@ -1,0 +1,27 @@
+{% include "professor_head.html" %}
+
+<div class="w-30  m-auto">
+    <div class="box-shadow p-20 mt-120">
+        <form action="assign_grade_action" method="post">
+            <input type="hidden" name="enrollment_id" value="{{enrollment_id}}">
+            <input type="hidden" name="submission_id" value="{{submission_id}}">
+
+            <div class="card-title">Assign Grade</div>
+            <div class="mt-20">
+                    <label for="grade">Choose Grade:</label>
+                    <select name="grade" id="grade" class="form-input" required>
+                      <option >Choose Grade</option>
+                      <option value="A+">A+</option>
+                      <option value="A">A</option>
+                      <option value="B+">B+</option>
+                      <option value="B">B</option>
+                      <option value="C+">C+</option>
+                        <option value="C">C</option>
+                    </select>
+            </div>
+            <div class="mt-20">
+                <input type="submit" class="btn-grad w-100  m-auto" value="Submit">
+            </div>
+        </form>
+    </div>
+</div>

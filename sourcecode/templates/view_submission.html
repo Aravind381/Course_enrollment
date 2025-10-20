@@ -1,0 +1,44 @@
+{% if session['role']=="professor" %}
+       {% include "professor_head.html" %}
+{% endif %}
+{% if session['role']=="student" %}
+       {% include "student_head.html" %}
+{% endif %}
+
+<div class="w-90  m-auto">
+    <div class="box-shadow p-20 mt-120">
+        <div class="txt-center">
+             <div>Submissions for <b>Assignment</b></div>
+            <div><h2>Student Submissions</h2></div>
+        </div>
+
+        <div class="">
+            <table class="table w-100">
+                <tr>
+                    <th>Submissions Deadline:</th>
+                    <th>Submission_date</th>
+                     <th>Submission_PDF</th>
+                    <th>Status</th>
+                    {% if session["role"]=="professor" %}
+                    <th>Action</th>
+                    {% endif %}
+                </tr>
+                {% for submission in submissions %}
+                    {% set assignment = get_assignment_id_by_submission(submission[5])%}
+                <tr>
+                    <td>{{assignment[4]}}</td>
+                    <td>{{submission[1]}}</td>
+                     <td><a href="../static/files/student_assignments/{{submission[3]}}">{{submission[3]}}</a></td>
+                    <td>{{submission[2]}}</td>
+                    {% if session["role"]=="professor" %}
+                        {% if submission[2]== 'submitted'  %}
+                         <td><a href="assign_grade?enrollment_id={{submission[4]}}&submission_id={{submission[0]}}" class="btn-grad w-50 m-auto ">Assign Grade</a></td>
+                        {% endif %}
+                    {% endif %}
+                </tr>
+                 {% endfor %}
+
+            </table>
+        </div>
+    </div>
+</div>

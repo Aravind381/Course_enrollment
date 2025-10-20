@@ -1,0 +1,36 @@
+{% include 'admin_head.html' %}
+<div class="mt-150">
+    <div class="flex">
+        <div class="w-50 m-auto">
+            <div class="card2 m-auto w-60 p-10">
+                <form action="add_course_action" method="post" enctype="multipart/form-data">
+                    <div class="card-title">Add Course</div>
+                    <div class="mt-30">
+                        <label>Course Code</label>
+                        <input type="text" name="course_code" id="course_code" placeholder="Enter Course Code" class="form-input" required>
+                    </div>
+                    <div class="mt-10">
+                        <label>Course Name</label>
+                        <input type="text" name="course_name" id="course_name" placeholder="Enter Course Name" class="form-input" required>
+                    </div>
+                    <div class="mt-10">
+                        <label for="course_picture">Picture:</label>
+                        <input type="file" id="course_picture" name="course_picture" class="form-input"  required>
+                    </div>
+                    <div class="mt-10">
+                        <label>Credits</label>
+                        <input type="number" name="credits" id="credits" placeholder="Enter Credits" class="form-input" required>
+                    </div>
+                    <div class="mt-10">
+                        <label for="description">Description:</label>
+                        <textarea name="description" id="description" rows="3" placeholder="Enter Description Abt Course"></textarea>
+                    </div>
+                    <div class="mt-10">
+                        <input type="submit" value="Add Course" class="btn-grad w-100 m-auto">
+                    </div>
+                </form>
+                 <div class="txt-msg">{{message}}</div>
+            </div>
+        </div>
+    </div>
+</div>

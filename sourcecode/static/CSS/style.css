@@ -1,0 +1,226 @@
+
+
+
+.min-height-100vh{
+    min-height: 100vh;
+}
+.min-height-70vh{
+    min-height: 70vh;
+}
+.img-utility{
+    background-size: 100%;
+    background-position: center;
+    overflow: auto;
+    background-repeat:no-repeat;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.welcome-txt{
+    font-weight:bold;
+    font-size:50px;
+    color:white;
+    text-shadow: 1px 1px 2px plum, 0 0 25px blue, 0 0 5px plum;
+}
+.card{
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    background: #00C9FF;
+    background: -webkit-linear-gradient(to right, #92FE9D, #00C9FF);
+    background: linear-gradient(to right, #92FE9D, #00C9FF);
+}
+.card-title {
+    font-size: 25px;
+    font-weight: bolder;
+    text-align: center;
+}
+.font-weight{
+    font-weight: 200px;
+}
+.card-text{
+    color:#FF4E88;
+    font-weight: bold;
+    font-size:18px;
+}
+
+.table, th, td {
+  border:2px solid white;
+  border-collapse:collapse;
+  padding:10px;
+}
+th{
+ background-color:#4ae4cd;
+}
+th{
+    color:white;
+      text-shadow: 1px 1px 2px red, 0 0 25px;
+
+}
+
+
+
+.box-shadow{
+  box-shadow:0 0 10px plum;
+}
+.text-bold{
+    font-weight:bold;
+}
+.text-color{
+    color:lightgreen;
+    font-size:18px;
+}
+.txt-center{
+    text-align:center;
+}
+.txt-end{
+    text-align:end;
+}
+.bg-blur{
+    backdrop-filter: invert(30%);
+}
+.bg-color{
+    background-color:#f5fbf9;
+}
+
+
+
+
+.table, th, td {
+      border:2px solid #A1D6E2;
+      text-align:center;
+}
+
+.flex{
+    display:flex;
+    flex-wrap:wrap;
+}
+.space-between{
+    justify-content:space-between;
+}
+.space-around{
+    justify-content:space-around;
+}
+.gap-10{
+    gap:10px;
+}
+.body-bg-color{
+    background-color:#4ae4cd;
+}
+.bgr{
+    background-color:red;
+}
+
+.display_block{
+    display:block;
+}
+.txt-w{
+  color:black;
+  font-weight:bold;
+}
+.txt-b{
+  color:black;
+  font-weight:30px;
+  text-shadow: 1px 1px 2px black, 0 0 25px clack, 0 0 5px darkblue;
+}
+.txt-msg{
+  color:plum;
+    font-size:25px;
+  text-shadow: 1px 1px 2px white, 0 0 85px clack, 0 0 5px darkblue;
+}
+
+
+.like-dislike-container {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.btn:hover {
+    background-color: #f0f0f0;
+}
+
+.btn:active {
+    background-color: #ccc;
+}
+
+
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none;
+    font-size: 16px;
+}
+
+
+.gap-5{
+    gap:5px;
+}
+
+/* main_home_page */
+
+.box{
+    background-image: url("https://t3.ftcdn.net/jpg/10/86/97/68/360_F_1086976819_T19uSDszyc1hhjewzGcfNWwAToqalEGq.jpg");
+}
+
+
+
+.card2 {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+ }
+
+.card2:hover {
+  transform: translateY(-10px);
+  box-shadow:0 10px 20px plum;
+}
+
+.student_login_img{
+    width:100px;
+    margin-left:35%;
+}
+.border_radius{
+    border-radius:50px;
+}
+.bgra a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.bgra svg {
+  vertical-align: middle;
+}
+.grade{
+    font-size:30px;
+    color:green;
+}
+
+.welcome-txt2{
+    font-size:50px;
+    color:white;
+}
+.danger{
+    color:red;
+    font-weight:bold;
+    font-size:20px;
+}
