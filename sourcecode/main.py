@@ -459,6 +459,7 @@ def add_section_action():
 
 
 
+# Helper functions for validation
 def is_valid_name(name):
     """Validate name to allow only letters, spaces, hyphens, and apostrophes."""
     if not name or not name.strip():
@@ -716,3 +717,4 @@ def assignGrade_action():
 
 
 app.run(debug=True)
+
