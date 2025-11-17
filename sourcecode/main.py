@@ -429,22 +429,50 @@ def add_section_action():
 
 
 
+# Updated to use parameterized query and return dict with named fields including full_name
 def get_professor_by_professor_id(professor_id):
-    cursor.execute("select * from professor where professor_id = '"+str(professor_id)+"'")
-    professors = cursor.fetchall()
-    return professors[0]
+    cursor.execute("SELECT professor_id, first_name, last_name, email, phone, designation, picture FROM professor WHERE professor_id = %s", (professor_id,))
+    row = cursor.fetchone()
+    if row is None:
+        return None
+    return {
+        'professor_id': row[0],
+        'first_name': row[1],
+        'last_name': row[2],
+        'email': row[3],
+        'phone': row[4],
+        'designation': row[5],
+        'picture': row[6],
+        'full_name': f"{row[1]} {row[2]}"
+    }
 
 
+# Updated to use parameterized query and return dict with named fields
 def get_course_by_course_id(course_id):
-    cursor.execute("select * from course where course_id= '"+str(course_id)+"'")
-    courses = cursor.fetchall()
-    return courses[0]
+    cursor.execute("SELECT course_id, course_code, course_name, description, course_picture, credits FROM course WHERE course_id = %s", (course_id,))
+    row = cursor.fetchone()
+    if row is None:
+        return None
+    return {
+        'course_id': row[0],
+        'course_code': row[1],
+        'course_name': row[2],
+        'description': row[3],
+        'course_picture': row[4],
+        'credits': row[5]
+    }
 
 
+# Updated to use parameterized query and return dict with named fields
 def get_department_by_department_id(department_id):
-    cursor.execute("select * from department where department_id= '"+str(department_id)+"'")
-    departments = cursor.fetchall()
-    return departments[0]
+    cursor.execute("SELECT department_id, department_name FROM department WHERE department_id = %s", (department_id,))
+    row = cursor.fetchone()
+    if row is None:
+        return None
+    return {
+        'department_id': row[0],
+        'department_name': row[1]
+    }
 
 
 def get_is_enrollment_expired(section_id,enrollment_start_date):
