@@ -1,6 +1,7 @@
 import os
 import random
 import datetime
+import re
 
 from flask import Flask,request,session,render_template,redirect
 
@@ -23,6 +24,19 @@ Student_assignments_files_path = APP_ROOT + "/static/files/student_assignments"
 
 admin_username = "admin"
 admin_password = "admin"
+
+
+def is_valid_name(name):
+    """
+    Validate a name to ensure it contains only letters (including accented characters),
+    spaces, hyphens, and apostrophes.
+    Returns True if valid, False otherwise.
+    """
+    if not name or not isinstance(name, str):
+        return False
+    # Pattern allows letters (including accented/unicode), spaces, hyphens, and apostrophes
+    pattern = r"^[A-Za-zÀ-ž' -]+$"
+    return re.match(pattern, name) is not None
 
 
 @app.route("/")
@@ -161,11 +175,18 @@ def logout():
 def professor():
     keyword = request.args.get("keyword")
     if keyword == None:
-        keyword =""
+        keyword = ""
     if keyword == "":
         cursor.execute("select * from professor")
     else:
-        cursor.execute("select * from professor where first_name like '%"+str(keyword)+"%' or last_name like '%"+str(keyword)+"%' or email like '%"+str(keyword)+"%' or designation like '%"+str(keyword)+"%'   ")
+        # If keyword contains only digits, search numeric fields (phone, ssn)
+        if keyword.isdigit():
+            cursor.execute("select * from professor where phone like %s or ssn like %s", 
+                         ('%' + keyword + '%', '%' + keyword + '%'))
+        else:
+            # Default: search only first_name and last_name
+            cursor.execute("select * from professor where first_name like %s or last_name like %s", 
+                         ('%' + keyword + '%', '%' + keyword + '%'))
     professors = cursor.fetchall()
     return render_template("professor.html", professors=professors)
 
@@ -179,6 +200,13 @@ def add_professor():
 def add_professor_action():
     first_name = request.form.get("first_name")
     last_name = request.form.get("last_name")
+    
+    # Validate first_name and last_name
+    if not is_valid_name(first_name):
+        return render_template("admin_message.html", message="Invalid First Name! Use only letters, spaces, hyphens, or apostrophes.")
+    if not is_valid_name(last_name):
+        return render_template("admin_message.html", message="Invalid Last Name! Use only letters, spaces, hyphens, or apostrophes.")
+    
     email = request.form.get("email")
     phone = request.form.get("phone")
     password = request.form.get("password")
@@ -187,16 +215,21 @@ def add_professor_action():
     picture = request.files.get("picture")
     path = Professor_files_path + "/" + picture.filename
     picture.save(path)
-    count = cursor.execute("select * from professor where ssn ='" + str(ssn) + "' ")
+    
+    # Use parameterized SQL for duplicate checks
+    count = cursor.execute("select * from professor where ssn = %s", (ssn,))
     if count > 0:
         return render_template("admin_message.html", message="Duplicate SSN !")
-    count = cursor.execute("select * from professor where email ='"+str(email)+"' ")
+    count = cursor.execute("select * from professor where email = %s", (email,))
     if count > 0:
         return render_template("admin_message.html", message="Duplicate Email !")
-    count = cursor.execute("select * from professor where phone = '"+str(phone)+"' ")
+    count = cursor.execute("select * from professor where phone = %s", (phone,))
     if count > 0:
         return render_template("admin_message.html", message="Duplicate Phone Number")
-    cursor.execute("insert into professor(first_name,last_name,email,phone,password,designation,ssn,picture,login_status) values('"+str(first_name)+"','"+str(last_name)+"','"+str(email)+"','"+str(phone)+"','"+str(password)+"','"+str(designation)+"','"+str(ssn)+"','"+str(picture.filename)+"', '"+str(False)+"') ")
+    
+    # Use parameterized SQL for insert
+    cursor.execute("insert into professor(first_name,last_name,email,phone,password,designation,ssn,picture,login_status) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)", 
+                  (first_name, last_name, email, phone, password, designation, ssn, picture.filename, str(False)))
     conn.commit()
     return redirect("/professor")
 
@@ -231,13 +264,23 @@ def edit_professor_profile():
 @app.route("/edit_professor_profile_action",methods=['post'])
 def edit_professor_profile_action():
     professor_id = request.form.get("professor_id")
-    ssn = request.form.get("ssn")
     first_name = request.form.get("first_name")
     last_name = request.form.get("last_name")
+    
+    # Validate first_name and last_name
+    if not is_valid_name(first_name):
+        return render_template("admin_message.html", message="Invalid First Name! Use only letters, spaces, hyphens, or apostrophes.")
+    if not is_valid_name(last_name):
+        return render_template("admin_message.html", message="Invalid Last Name! Use only letters, spaces, hyphens, or apostrophes.")
+    
+    ssn = request.form.get("ssn")
     email = request.form.get("email")
     phone = request.form.get("phone")
     designation = request.form.get("designation")
-    cursor.execute("update professor set first_name='"+str(first_name)+"',last_name='"+str(last_name)+"',email='"+str(email)+"', phone='"+str(phone)+"',designation='"+str(designation)+"',ssn='"+str(ssn)+"' where professor_id='"+str(professor_id)+"' ")
+    
+    # Use parameterized SQL for update
+    cursor.execute("update professor set first_name=%s, last_name=%s, email=%s, phone=%s, designation=%s, ssn=%s where professor_id=%s", 
+                  (first_name, last_name, email, phone, designation, ssn, professor_id))
     conn.commit()
     return redirect("/professor")
 
